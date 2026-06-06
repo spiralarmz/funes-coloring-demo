@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Product Requirements Document — VR 3D Coloring Game Demo</title>
+<style>
+  :root { --fg:#1f2328; --muted:#57606a; --line:#d0d7de; --accent:#6e5494; --bg:#ffffff; --soft:#f6f8fa; }
+  * { box-sizing: border-box; }
+  body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+         color: var(--fg); background: var(--bg); line-height: 1.6;
+         max-width: 860px; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; }
+  h1 { font-size: 1.9rem; margin: 0 0 .25rem; }
+  h2 { font-size: 1.3rem; margin: 2.2rem 0 .6rem; padding-bottom: .3rem; border-bottom: 1px solid var(--line); }
+  h3 { font-size: 1.05rem; margin: 1.4rem 0 .4rem; }
+  a { color: var(--accent); }
+  .sub { color: var(--muted); margin: 0 0 1.5rem; }
+  .meta { background: var(--soft); border: 1px solid var(--line); border-radius: 8px;
+          padding: .9rem 1.1rem; display: flex; flex-wrap: wrap; gap: .4rem 2rem; font-size: .92rem; }
+  .meta b { color: var(--fg); }
+  table { border-collapse: collapse; width: 100%; margin: .8rem 0; font-size: .92rem; }
+  th, td { border: 1px solid var(--line); padding: .5rem .65rem; text-align: left; vertical-align: top; }
+  th { background: var(--soft); }
+  code { background: var(--soft); padding: .1rem .35rem; border-radius: 4px; font-size: .9em; }
+  ul, ol { padding-left: 1.4rem; }
+  li { margin: .25rem 0; }
+  .tag { display: inline-block; font-size: .75rem; background: var(--accent); color: #fff;
+         border-radius: 999px; padding: .08rem .6rem; vertical-align: middle; }
+  .muted { color: var(--muted); }
+  footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; }
+</style>
+</head>
+<body>
+
+<h1>Product Requirements Document</h1>
+<p class="sub">VR 3D Coloring Game Demo &mdash; powered by Funes.World models</p>
+
+<div class="meta">
+  <span><b>Version:</b> 0.1</span>
+  <span><b>Last updated:</b> 2026-06-06</span>
+  <span><b>Status:</b> Draft / Concept</span>
+  <span><b>Owner:</b> Project author</span>
+</div>
+
+<h2>1. Vision &amp; Purpose</h2>
+<p>A VR puzzle game demo with a soothing, cozy vibe. The player picks up a white (uncolored)
+photoscanned architectural model and uses paint and spray tools to slowly reveal its full color &mdash;
+a tactile, meditative "3D coloring book." The aim of this demo is to validate the <em>core reveal loop</em>
+and the calming tone, not to ship a full game.</p>
+
+<h2>2. Goals &amp; Non-Goals</h2>
+<h3>Goals (demo)</h3>
+<ul>
+  <li>One fully playable Funes.World model that can be colored start to finish.</li>
+  <li>A satisfying, tactile color-reveal loop using spray + brush tools.</li>
+  <li>A calm, cozy atmosphere (audio, lighting, pacing, haptics).</li>
+  <li>Runs comfortably on Meta Quest 3 / 3S standalone at a stable framerate.</li>
+</ul>
+<h3>Non-Goals (demo)</h3>
+<ul>
+  <li>No multiplayer.</li>
+  <li>No meta-progression, economy, or unlock systems.</li>
+  <li>No in-game level/model editor.</li>
+  <li>No fail states, scoring pressure, or timers.</li>
+</ul>
+
+<h2>3. Target Platforms</h2>
+<table>
+  <tr><th>Tier</th><th>Platforms</th><th>Notes</th></tr>
+  <tr><td><span class="tag">Primary</span></td><td>Meta Quest 3 / 3S (standalone)</td><td>Immediate target for the demo.</td></tr>
+  <tr><td>Stretch</td><td>PCVR; Pico 4; Android XR; Apple Vision Pro</td><td>Pursue once core loop is proven.</td></tr>
+  <tr><td>Aspirational</td><td>AR glasses &mdash; XReal, Snap Spectacles</td><td>Only if/when toolkits make it feasible. Not a demo target.</td></tr>
+</table>
+
+<h2>4. Prior Art / References</h2>
+<table>
+  <tr><th>Title</th><th>What we borrow</th></tr>
+  <tr><td>Puzzling Places</td><td>Reverence for photoscanned/photogrammetry models; tabletop-scale, calming assembly.</td></tr>
+  <tr><td>Color-A-Tube</td><td>Direct "coloring" mechanic and palette interaction in a relaxing frame.</td></tr>
+  <tr><td>Cubism</td><td>Minimalist, intuitive VR object manipulation; clean diegetic UI.</td></tr>
+  <tr><td>Jigsaw Night</td><td>Cozy ambiance, low-pressure pacing, comfortable seated play.</td></tr>
+  <tr><td>Powerwash Simulator VR</td><td>The deeply satisfying "reveal a clean/colored surface" loop &mdash; our closest mechanical cousin.</td></tr>
+</table>
+
+<h2>5. Gameplay &amp; Mechanics</h2>
+<h3>Primary mechanic (MVP) <span class="tag">Selected</span></h3>
+<p><b>Spray + brush reveal.</b> A spray can flood-reveals broad color zones of the model; a brush
+refines detail and edges. This is the most tactile and "cozy" option and is closest in feel to
+Powerwash Simulator. The demo is built around this loop.</p>
+<h3>Alternative mechanics (documented, not built for the demo)</h3>
+<ul>
+  <li><b>Color-sequence guide</b> &mdash; follow a guided order of zones/colors. Structured and low-frustration, but risks monotony.</li>
+  <li><b>X-Ray then paint</b> &mdash; use a scan/X-ray tool to reveal a "where to paint" map first, then color. More puzzle-forward.</li>
+  <li><b>Pick-and-place elements</b> &mdash; extract colored elements and place them onto the white model to reveal areas step by step. Most novel, highest build cost.</li>
+</ul>
+<p class="muted">These remain candidates for layering on top of the MVP loop if the core feel needs more depth.</p>
+
+<h2>6. Core Loop &amp; UX</h2>
+<ol>
+  <li><b>Grab</b> the white model and bring it to a comfortable inspection distance.</li>
+  <li><b>Inspect</b> &mdash; turn it over, find areas to color.</li>
+  <li><b>Spray</b> broad color zones with the spray tool.</li>
+  <li><b>Brush</b> in detail and edges.</li>
+  <li><b>Completion beat</b> &mdash; a gentle, satisfying payoff when the model is fully revealed.</li>
+</ol>
+<p>Design pillars: <b>soothing audio</b>, <b>gentle haptics</b> tied to tool contact, <b>no fail state</b>,
+<b>no timer</b>, and <b>readable, diegetic tools</b> (the can and brush are physical objects, minimal floating UI).</p>
+
+<h2>7. Content &amp; Assets</h2>
+<p>Models are <b>photoscanned architectural assets from Funes.World</b>. All Funes.World models are free to use,
+and the project author has a personal relationship with the founder permitting reuse in public and even commercial
+settings. Exact license wording for this repo is an open item (see §11).</p>
+
+<h2>8. Technical Requirements</h2>
+<ul>
+  <li><b>Engine:</b> Unity 6.</li>
+  <li><b>VR SDK:</b> Meta XR SDK (incl. Interaction SDK for grab + tool interactions), targeting OpenXR.</li>
+  <li><b>Platform build:</b> Android / Quest standalone; mobile-class performance budget.</li>
+  <li><b>Reveal technique (to prototype):</b> texture-space painting (paint into a render texture / mask),
+      vertex-color painting, or a shader-driven reveal mask. Trade-offs in §11.</li>
+  <li><b>Performance:</b> hold target framerate on Quest 3/3S; budget poly count and texture memory of
+      photoscanned assets accordingly (decimation / texture compression likely required).</li>
+</ul>
+
+<h2>9. Success Criteria (demo)</h2>
+<ul>
+  <li>A first-time player understands and completes the color-reveal loop without instruction.</li>
+  <li>Testers describe the experience as calming/satisfying.</li>
+  <li>Stable framerate on Quest 3/3S throughout a full model.</li>
+  <li>The reveal interaction feels physical and responsive (good haptics + visual feedback).</li>
+</ul>
+
+<h2>10. Risks &amp; Open Questions</h2>
+<ul>
+  <li><b>Reveal tech:</b> which painting approach gives the best feel within the Quest perf budget?</li>
+  <li><b>Asset budget:</b> photoscanned models are heavy &mdash; how much decimation/retexturing is needed?</li>
+  <li><b>Depth vs. boredom:</b> is the spray+brush loop engaging enough alone, or does it need a layered mechanic?</li>
+  <li><b>Licensing:</b> formal wording for Funes.World asset reuse in this repo.</li>
+</ul>
+
+<h2>11. Roadmap (summary)</h2>
+<p>See <a href="docs/roadmap.md">docs/roadmap.md</a> for detail. High level: prototype reveal tech &rarr;
+one polished model + cozy layer &rarr; Quest 3/3S demo build &rarr; evaluate stretch platforms.</p>
+
+<h2>12. Version History</h2>
+<table>
+  <tr><th>Version</th><th>Date</th><th>Changes</th></tr>
+  <tr><td>0.1</td><td>2026-06-06</td><td>Initial PRD: vision, platforms, references, MVP mechanic (spray + brush reveal), tech stack, open questions.</td></tr>
+</table>
+
+<footer>
+  Living document &mdash; edited over time alongside <code>CHANGELOG.md</code> and the <code>docs/</code> folder.
+  Models courtesy of <a href="https://funes.world">Funes.World</a>.
+</footer>
+
+</body>
+</html>

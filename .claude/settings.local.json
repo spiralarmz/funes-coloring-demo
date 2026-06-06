@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -la \"D:\\\\Users\\\\OneDrive\\\\_PROJECTS\\\\_MAIN QUESTS\\\\FUNES.WORLD\\\\_Coloring Demo\" 2>/dev/null; echo \"---\"; ls -la \"C:\\\\Users\\\\jason\\\\.claude\\\\plans\\\\\" 2>/dev/null)"
+    ]
+  }
+}
