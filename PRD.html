@@ -36,10 +36,10 @@
 <p class="sub">VR 3D Coloring Game Demo &mdash; powered by Funes.World models</p>
 
 <div class="meta">
-  <span><b>Version:</b> 0.1</span>
-  <span><b>Last updated:</b> 2026-06-06</span>
+  <span><b>Version:</b> 0.2</span>
+  <span><b>Last updated:</b> 2026-06-07</span>
   <span><b>Status:</b> Draft / Concept</span>
-  <span><b>Owner:</b> Project author</span>
+  <span><b>Owner:</b> SpiralArmZ</span>
 </div>
 
 <h2>1. Vision &amp; Purpose</h2>
@@ -94,6 +94,9 @@ Powerwash Simulator. The demo is built around this loop.</p>
   <li><b>Pick-and-place elements</b> &mdash; extract colored elements and place them onto the white model to reveal areas step by step. Most novel, highest build cost.</li>
 </ul>
 <p class="muted">These remain candidates for layering on top of the MVP loop if the core feel needs more depth.</p>
+<p><b>Layering strategy:</b> ship spray + brush first. If playtests show the loop needs more depth, the
+most natural additions are an optional <b>X-ray "where to paint" hint</b> or a light <b>sequence/goal
+overlay</b> &mdash; added without removing the freeform, no-pressure core.</p>
 
 <h2>6. Core Loop &amp; UX</h2>
 <ol>
@@ -107,9 +110,13 @@ Powerwash Simulator. The demo is built around this loop.</p>
 <b>no timer</b>, and <b>readable, diegetic tools</b> (the can and brush are physical objects, minimal floating UI).</p>
 
 <h2>7. Content &amp; Assets</h2>
-<p>Models are <b>photoscanned architectural assets from Funes.World</b>. All Funes.World models are free to use,
-and the project author has a personal relationship with the founder permitting reuse in public and even commercial
-settings. Exact license wording for this repo is an open item (see §11).</p>
+<p>Models are <b>photoscanned architectural assets from Funes.World</b>, used with the founder's
+permission for public and commercial settings (a personal relationship with the founder).</p>
+<p class="muted">License caveat: "free" 3D assets are typically published under a specific Creative Commons
+license &mdash; CC BY allows commercial use with attribution, CC0 waives attribution, but CC BY-NC forbids
+commercial use and CC BY-ND forbids modification/recoloring. Since this project recolors models
+commercially, the grant should explicitly cover <b>commercial use AND derivatives</b>. Getting this in
+writing is an open item (see §10).</p>
 
 <h2>8. Technical Requirements</h2>
 <ul>
@@ -138,18 +145,46 @@ settings. Exact license wording for this repo is an open item (see §11).</p>
   <li><b>Licensing:</b> formal wording for Funes.World asset reuse in this repo.</li>
 </ul>
 
-<h2>11. Roadmap (summary)</h2>
-<p>See <a href="docs/roadmap.md">docs/roadmap.md</a> for detail. High level: prototype reveal tech &rarr;
-one polished model + cozy layer &rarr; Quest 3/3S demo build &rarr; evaluate stretch platforms.</p>
+<h2>11. Roadmap</h2>
+<p>Dates intentionally omitted while in the concept stage.</p>
+<h3>Milestone 0 &mdash; Foundations (current)</h3>
+<ul>
+  <li>Create repository and the living PRD. <span class="muted">(done)</span></li>
+  <li>Confirm repo name, visibility, and asset-license wording.</li>
+</ul>
+<h3>Milestone 1 &mdash; Reveal prototype</h3>
+<ul>
+  <li>Stand up a Unity 6 + Meta XR SDK project targeting Quest 3/3S.</li>
+  <li>Grab a model and hold a spray can / brush (Interaction SDK).</li>
+  <li>Prototype 1&ndash;2 reveal techniques (texture-space and/or vertex-color); compare feel + perf; pick one.</li>
+</ul>
+<h3>Milestone 2 &mdash; One cozy model, end to end</h3>
+<ul>
+  <li>Import a Funes.World model; decimate/retopo and compress textures for Quest.</li>
+  <li>Full color-reveal of a single model with spray + brush.</li>
+  <li>Cozy layer: ambient audio, lighting, gentle haptics, completion beat.</li>
+</ul>
+<h3>Milestone 3 &mdash; Playable demo build</h3>
+<ul>
+  <li>Stable framerate on Quest 3/3S across a full model.</li>
+  <li>First-time players complete the loop without instruction.</li>
+  <li>Internal playtest: "is it calming/satisfying?"</li>
+</ul>
+<h3>Milestone 4 &mdash; Evaluate stretch goals</h3>
+<ul>
+  <li>Assess PCVR / Pico 4 / Android XR / Apple Vision Pro via OpenXR.</li>
+  <li>Research AR-glasses feasibility (XReal, Spectacles).</li>
+</ul>
 
 <h2>12. Version History</h2>
 <table>
   <tr><th>Version</th><th>Date</th><th>Changes</th></tr>
+  <tr><td>0.2</td><td>2026-06-07</td><td>Consolidated the separate <code>docs/</code> notes into this single PRD (full roadmap + layering strategy folded in). Set owner/license holder to SpiralArmZ. Sharpened the asset-licensing caveat (Creative Commons nuance).</td></tr>
   <tr><td>0.1</td><td>2026-06-06</td><td>Initial PRD: vision, platforms, references, MVP mechanic (spray + brush reveal), tech stack, open questions.</td></tr>
 </table>
 
 <footer>
-  Living document &mdash; edited over time alongside <code>CHANGELOG.md</code> and the <code>docs/</code> folder.
+  Living document &mdash; edited over time; notable changes summarized in <code>CHANGELOG.md</code>.
   Models courtesy of <a href="https://funes.world">Funes.World</a>.
 </footer>
 

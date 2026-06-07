@@ -10,11 +10,10 @@
 
 A VR coloring puzzle with a calm, cozy vibe — closest in spirit to the satisfying "reveal" loop of
 *Powerwash Simulator VR*, applied to photoscanned architecture. This repository documents the design
-and tracks progress over time. The central, living document is the **Product Requirements Document**.
+and tracks progress over time. The single, living source of truth is the **Product Requirements Document**.
 
-- 📄 **[Product Requirements Document (PRD.html)](PRD.html)** — the source of truth, evolved over time.
+- 📄 **[Product Requirements Document (PRD.html)](PRD.html)** — vision, platforms, gameplay, tech stack, roadmap, and open questions. Evolved over time.
 - 📓 **[CHANGELOG.md](CHANGELOG.md)** — how the requirements have changed.
-- 📁 **[docs/](docs/)** — deeper notes on gameplay, references, tech stack, and roadmap.
 
 ## Platform targets
 
@@ -28,12 +27,12 @@ and tracks progress over time. The central, living document is the **Product Req
 
 - **Engine:** Unity 6
 - **VR SDK:** Meta XR SDK (Interaction SDK), targeting OpenXR
-- See **[docs/tech-stack.md](docs/tech-stack.md)** for details.
+- See the PRD's *Technical Requirements* section for details.
 
 ## Core mechanic (MVP)
 
 **Spray + brush reveal** — a spray can flood-reveals broad color zones; a brush refines detail.
-Alternative mechanics are documented in **[docs/gameplay.md](docs/gameplay.md)**.
+Alternative mechanics are documented in the PRD's *Gameplay & Mechanics* section.
 
 ## How this repo is used
 

@@ -5,6 +5,19 @@ The PRD (`PRD.html`) is the living source of truth; this file summarizes how it 
 
 Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.2] — 2026-06-07
+
+### Changed
+- Consolidated the four `docs/*.md` notes into the single living **PRD.html** — the roadmap milestone
+  checklist and the mechanic layering strategy were folded in. A single design doc is cleaner at this stage.
+- Set the project owner and `LICENSE` copyright holder to **SpiralArmZ**.
+- Sharpened the asset-licensing note: "free" 3D models are usually under a specific Creative Commons
+  license (CC BY / CC0 allow commercial use; CC BY-NC / CC BY-ND do not). The Funes.World grant should
+  explicitly cover commercial use and derivatives, in writing.
+
+### Removed
+- `docs/gameplay.md`, `docs/references.md`, `docs/tech-stack.md`, `docs/roadmap.md` (merged into PRD.html).
+
 ## [0.1] — 2026-06-06
 
 ### Added

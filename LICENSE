@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2026 Project author
+Copyright (c) 2026 SpiralArmZ
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -24,5 +24,10 @@ SOFTWARE.
 
 NOTE ON 3D ASSETS: The MIT license above covers source code and documentation in
 this repository. Photoscanned 3D models originate from Funes.World and are governed
-by their own terms; they are used here with permission for public and commercial
-reuse. Confirm and finalize the exact asset-license wording before redistribution.
+by their own terms, used here with the founder's permission. The exact terms are
+still to be finalized: "free" 3D assets are typically published under a specific
+Creative Commons license (e.g. CC BY allows commercial use with attribution; CC0
+waives attribution; but CC BY-NC forbids commercial use and CC BY-ND forbids
+modification/recoloring). Because this project recolors models commercially, confirm
+in writing that the grant covers commercial use AND derivative works before
+redistribution.
