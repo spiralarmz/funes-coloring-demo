@@ -42,6 +42,9 @@ sysinfo.txt
 [Aa]ssets/AssetStoreTools*
 [Aa]ssets/[Pp]lugins/[Ee]ditor/JetBrains*
 
+# ---- Claude Code (local settings) ----
+.claude/settings.local.json
+
 # ---- OS / editor cruft ----
 .DS_Store
 Thumbs.db
