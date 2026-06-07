@@ -36,7 +36,7 @@
 <p class="sub">VR 3D Coloring Game Demo &mdash; powered by Funes.World models</p>
 
 <div class="meta">
-  <span><b>Version:</b> 0.2</span>
+  <span><b>Version:</b> 0.3</span>
   <span><b>Last updated:</b> 2026-06-07</span>
   <span><b>Status:</b> Draft / Concept</span>
   <span><b>Owner:</b> SpiralArmZ</span>
@@ -150,11 +150,12 @@ writing is an open item (see §10).</p>
 <h3>Milestone 0 &mdash; Foundations (current)</h3>
 <ul>
   <li>Create repository and the living PRD. <span class="muted">(done)</span></li>
-  <li>Confirm repo name, visibility, and asset-license wording.</li>
+  <li>Scaffold the Unity 6 URP project (editor 6000.3.2f1, mobile renderer) at the repo root. <span class="muted">(done)</span></li>
+  <li>Confirm asset-license wording with Funes.World (in writing). <span class="muted">(open)</span></li>
 </ul>
 <h3>Milestone 1 &mdash; Reveal prototype</h3>
 <ul>
-  <li>Stand up a Unity 6 + Meta XR SDK project targeting Quest 3/3S.</li>
+  <li>Install Meta XR All-in-One SDK; switch to Android; run Meta Project Setup Tool. <span class="muted">(next)</span></li>
   <li>Grab a model and hold a spray can / brush (Interaction SDK).</li>
   <li>Prototype 1&ndash;2 reveal techniques (texture-space and/or vertex-color); compare feel + perf; pick one.</li>
 </ul>
@@ -179,6 +180,7 @@ writing is an open item (see §10).</p>
 <h2>12. Version History</h2>
 <table>
   <tr><th>Version</th><th>Date</th><th>Changes</th></tr>
+  <tr><td>0.3</td><td>2026-06-07</td><td>Scaffolded the Unity 6 URP project (editor 6000.3.2f1) at the repo root from Unity's bundled URP template; set product name/app id (SpiralArmZ / Funes Coloring Demo); added <code>Assets/_Project</code> structure. Updated roadmap; Meta XR All-in-One SDK install is the next step.</td></tr>
   <tr><td>0.2</td><td>2026-06-07</td><td>Consolidated the separate <code>docs/</code> notes into this single PRD (full roadmap + layering strategy folded in). Set owner/license holder to SpiralArmZ. Sharpened the asset-licensing caveat (Creative Commons nuance).</td></tr>
   <tr><td>0.1</td><td>2026-06-06</td><td>Initial PRD: vision, platforms, references, MVP mechanic (spray + brush reveal), tech stack, open questions.</td></tr>
 </table>

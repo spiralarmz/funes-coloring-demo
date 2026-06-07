@@ -5,6 +5,20 @@ The PRD (`PRD.html`) is the living source of truth; this file summarizes how it 
 
 Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.3] — 2026-06-07
+
+### Added
+- **Unity 6 URP project** scaffolded at the repository root (editor `6000.3.2f1`), seeded from Unity's
+  bundled URP 3D template so package versions resolve cleanly (`Packages/manifest.json` +
+  `packages-lock.json`). Includes the mobile/PC URP render assets, Input System, and a `SampleScene`.
+- `Assets/_Project/` working structure (Scenes, Scripts, Art, Materials, Shaders, Prefabs, Audio).
+- README "Getting started in Unity" section, incl. the Meta XR All-in-One SDK install step (Asset Store).
+
+### Changed
+- Product name → "Funes Coloring Demo", company → "SpiralArmZ", Android app id
+  `com.SpiralArmZ.FunesColoringDemo`.
+- Removed the URP template's welcome/tutorial assets (`Readme.asset`, `TutorialInfo/`).
+
 ## [0.2] — 2026-06-07
 
 ### Changed
