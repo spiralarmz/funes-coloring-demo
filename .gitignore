@@ -42,6 +42,15 @@ sysinfo.txt
 [Aa]ssets/AssetStoreTools*
 [Aa]ssets/[Pp]lugins/[Ee]ditor/JetBrains*
 
+# ---- Heavy source assets kept out of git (decide storage deliberately) ----
+# Raw Funes.World photoscans live here locally. Excluded for now: large, and the
+# public-repo license grant isn't confirmed in writing yet. See PRD asset notes.
+[Aa]ssets/_External/
+[Aa]ssets/_External.meta
+
+# Stray compiler artifact occasionally dropped at the project root
+TempAssembly.dll
+
 # ---- Claude Code (local settings) ----
 .claude/settings.local.json
 

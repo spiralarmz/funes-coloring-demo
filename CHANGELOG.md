@@ -5,6 +5,19 @@ The PRD (`PRD.html`) is the living source of truth; this file summarizes how it 
 
 Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.5] — 2026-06-09
+
+### Added
+- **Reveal prototype (texture-space painting):** `Funes/RevealMask` URP shader (lerps white → albedo by a
+  render-texture mask) + `Funes/BrushStamp` blit shader, driven by `PaintableSurface` (ping-pong mask RT).
+- **Input-decoupled paint stack:** abstract `PaintProbe` with `MousePaintProbe` (desktop) and
+  `ToolPaintProbe` (VR controller) feeding one `PaintTool` — the PRD §8 architecture in practice (same
+  paint core, swappable input). Validated on desktop via the mouse driver.
+
+### Notes
+- Reveal mask render texture forced to linear R8 (avoids the R8_SRGB fallback in Linear-color projects).
+- Desktop iteration needs "Initialize XR on Startup" unchecked so the flat camera/mouse work; re-enable for VR.
+
 ## [0.4] — 2026-06-08
 
 ### Added
