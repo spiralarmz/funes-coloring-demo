@@ -5,6 +5,23 @@ The PRD (`PRD.html`) is the living source of truth; this file summarizes how it 
 
 Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.4] — 2026-06-08
+
+### Added
+- **Architecture principle: decouple player actions from Meta input** (PRD §8). All paint/spray actions go
+  through an input-agnostic interface; the Meta Interaction SDK is one driver behind it. Keeps the gameplay
+  portable to non-VR touch (web) and other XR runtimes; the core scene must build without Meta packages.
+- **Web (non-VR Unity WebGL) stretch target** (PRD §3/§10/§11): a tiny level playable in a mobile browser.
+  Documented constraints — WebGL2 has no compute shaders (reveal shader must stay WebGL2-safe), Meta
+  packages are excluded from web builds, and three.js is out of scope (separate reimplementation, not a
+  Unity build target). Add the editor's Web module only when this milestone begins.
+
+### Changed
+- Editor updated to **6000.3.17f1** (also resolved the Unity 6.3 package "invalid signature" false positives
+  and pulled Input System 1.19.0 / OpenXR plugin in via the Meta setup).
+- **Relocated the project off OneDrive** into a local folder (`Unity Projects/funes-coloring-demo`) to stop
+  cloud-sync-induced import errors. Re-homed the repo onto a fresh Unity 6 project created by the editor.
+
 ## [0.3] — 2026-06-07
 
 ### Added

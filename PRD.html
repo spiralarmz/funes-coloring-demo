@@ -36,8 +36,8 @@
 <p class="sub">VR 3D Coloring Game Demo &mdash; powered by Funes.World models</p>
 
 <div class="meta">
-  <span><b>Version:</b> 0.3</span>
-  <span><b>Last updated:</b> 2026-06-07</span>
+  <span><b>Version:</b> 0.4</span>
+  <span><b>Last updated:</b> 2026-06-08</span>
   <span><b>Status:</b> Draft / Concept</span>
   <span><b>Owner:</b> SpiralArmZ</span>
 </div>
@@ -68,7 +68,8 @@ and the calming tone, not to ship a full game.</p>
 <table>
   <tr><th>Tier</th><th>Platforms</th><th>Notes</th></tr>
   <tr><td><span class="tag">Primary</span></td><td>Meta Quest 3 / 3S (standalone)</td><td>Immediate target for the demo.</td></tr>
-  <tr><td>Stretch</td><td>PCVR; Pico 4; Android XR; Apple Vision Pro</td><td>Pursue once core loop is proven.</td></tr>
+  <tr><td>Stretch</td><td>PCVR; Pico 4; Android XR; Apple Vision Pro</td><td>Pursue once core loop is proven. OpenXR eases most of these.</td></tr>
+  <tr><td>Stretch (web)</td><td>Mobile browser &mdash; a tiny level via Unity WebGL</td><td><b>Non-VR</b>, flat + touch-controlled. Unity WebGL has no native WebXR, so this is not in-browser VR. "three.js" would be a separate reimplementation, not a Unity build target. See §8 / §10 for the constraints that keep this feasible.</td></tr>
   <tr><td>Aspirational</td><td>AR glasses &mdash; XReal, Snap Spectacles</td><td>Only if/when toolkits make it feasible. Not a demo target.</td></tr>
 </table>
 
@@ -120,14 +121,26 @@ writing is an open item (see §10).</p>
 
 <h2>8. Technical Requirements</h2>
 <ul>
-  <li><b>Engine:</b> Unity 6.</li>
-  <li><b>VR SDK:</b> Meta XR SDK (incl. Interaction SDK for grab + tool interactions), targeting OpenXR.</li>
+  <li><b>Engine:</b> Unity 6 (editor <code>6000.3.17f1</code>), URP (mobile renderer for Quest).</li>
+  <li><b>VR SDK:</b> Meta XR All-in-One SDK (incl. Interaction SDK for grab + tool interactions), via OpenXR + the Meta Quest feature group.</li>
   <li><b>Platform build:</b> Android / Quest standalone; mobile-class performance budget.</li>
   <li><b>Reveal technique (to prototype):</b> texture-space painting (paint into a render texture / mask),
-      vertex-color painting, or a shader-driven reveal mask. Trade-offs in §11.</li>
+      vertex-color painting, or a shader-driven reveal mask. Trade-offs in §11.
+      <b>Keep it WebGL2-safe</b> if the web stretch goal matters: WebGL2 has <em>no compute shaders</em>,
+      so a compute-based painter would not port. Fragment / render-texture painting and vertex-color
+      approaches run on WebGL2 cleanly.</li>
   <li><b>Performance:</b> hold target framerate on Quest 3/3S; budget poly count and texture memory of
       photoscanned assets accordingly (decimation / texture compression likely required).</li>
 </ul>
+<h3>Architecture &mdash; decouple player actions from Meta input</h3>
+<p>Route every player <em>action</em> (paint/spray: hit point, target surface, brush radius, color, trigger
+strength) through an <b>input-agnostic interface</b>. The Meta Interaction SDK (controllers / hands) is
+treated as just <em>one</em> input driver behind that interface &mdash; not wired directly into the paint/reveal
+logic. This keeps the gameplay portable: a non-VR <b>touch/mouse driver</b> can feed the same actions for a
+mobile-browser (WebGL) build, and other XR runtimes (Pico, Android XR) can plug in similarly.</p>
+<p class="muted">Corollary: the cozy core scene and reveal logic must be <b>buildable without Meta packages</b>
+(Meta XR SDK is excluded from any WebGL build). This is nearly free to honor now and expensive to retrofit
+later, so it is a standing design constraint from the first prototype.</p>
 
 <h2>9. Success Criteria (demo)</h2>
 <ul>
@@ -142,6 +155,8 @@ writing is an open item (see §10).</p>
   <li><b>Reveal tech:</b> which painting approach gives the best feel within the Quest perf budget?</li>
   <li><b>Asset budget:</b> photoscanned models are heavy &mdash; how much decimation/retexturing is needed?</li>
   <li><b>Depth vs. boredom:</b> is the spray+brush loop engaging enough alone, or does it need a layered mechanic?</li>
+  <li><b>Web portability:</b> does the chosen reveal shader stay WebGL2-safe (no compute), and is the input
+      layer abstracted enough that a touch driver "just works"? Decided early or it gets costly.</li>
   <li><b>Licensing:</b> formal wording for Funes.World asset reuse in this repo.</li>
 </ul>
 
@@ -150,7 +165,7 @@ writing is an open item (see §10).</p>
 <h3>Milestone 0 &mdash; Foundations (current)</h3>
 <ul>
   <li>Create repository and the living PRD. <span class="muted">(done)</span></li>
-  <li>Scaffold the Unity 6 URP project (editor 6000.3.2f1, mobile renderer) at the repo root. <span class="muted">(done)</span></li>
+  <li>Scaffold the Unity 6 URP project at the repo root; editor updated to 6000.3.17f1. <span class="muted">(done)</span></li>
   <li>Confirm asset-license wording with Funes.World (in writing). <span class="muted">(open)</span></li>
 </ul>
 <h3>Milestone 1 &mdash; Reveal prototype</h3>
@@ -174,12 +189,15 @@ writing is an open item (see §10).</p>
 <h3>Milestone 4 &mdash; Evaluate stretch goals</h3>
 <ul>
   <li>Assess PCVR / Pico 4 / Android XR / Apple Vision Pro via OpenXR.</li>
+  <li>Spike a <b>non-VR Unity WebGL build</b> of a tiny level with a touch input driver (mobile-browser goal).
+      Relies on the §8 input-decoupling holding up. Add the Web module to the editor only at this point.</li>
   <li>Research AR-glasses feasibility (XReal, Spectacles).</li>
 </ul>
 
 <h2>12. Version History</h2>
 <table>
   <tr><th>Version</th><th>Date</th><th>Changes</th></tr>
+  <tr><td>0.4</td><td>2026-06-08</td><td>Added the <b>input-decoupling architecture principle</b> (player actions behind an input-agnostic interface; Meta input is one driver) and a <b>web (non-VR Unity WebGL) stretch target</b> for a tiny level in a mobile browser, with its constraints (WebGL2 = no compute shaders; Meta packages excluded from web builds; three.js is out of scope). Updated editor to 6000.3.17f1. <em>Note:</em> project relocated off OneDrive into a local folder to stop sync-induced import errors; repo re-homed to a fresh Unity 6 project.</td></tr>
   <tr><td>0.3</td><td>2026-06-07</td><td>Scaffolded the Unity 6 URP project (editor 6000.3.2f1) at the repo root from Unity's bundled URP template; set product name/app id (SpiralArmZ / Funes Coloring Demo); added <code>Assets/_Project</code> structure. Updated roadmap; Meta XR All-in-One SDK install is the next step.</td></tr>
   <tr><td>0.2</td><td>2026-06-07</td><td>Consolidated the separate <code>docs/</code> notes into this single PRD (full roadmap + layering strategy folded in). Set owner/license holder to SpiralArmZ. Sharpened the asset-licensing caveat (Creative Commons nuance).</td></tr>
   <tr><td>0.1</td><td>2026-06-06</td><td>Initial PRD: vision, platforms, references, MVP mechanic (spray + brush reveal), tech stack, open questions.</td></tr>

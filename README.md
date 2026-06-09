@@ -4,7 +4,7 @@
 > full color with spray and brush tools — a soothing, meditative "3D coloring book."
 > Models powered by [Funes.World](https://funes.world).
 
-**Status:** Prototype setup (PRD v0.3)
+**Status:** Prototype setup (PRD v0.4)
 
 ## What this is
 
