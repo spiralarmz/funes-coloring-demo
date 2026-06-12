@@ -36,8 +36,8 @@
 <p class="sub">VR 3D Coloring Game Demo &mdash; powered by Funes.World models</p>
 
 <div class="meta">
-  <span><b>Version:</b> 0.5</span>
-  <span><b>Last updated:</b> 2026-06-09</span>
+  <span><b>Version:</b> 0.6</span>
+  <span><b>Last updated:</b> 2026-06-12</span>
   <span><b>Status:</b> Draft / Concept</span>
   <span><b>Owner:</b> SpiralArmZ</span>
 </div>
@@ -118,6 +118,9 @@ license &mdash; CC BY allows commercial use with attribution, CC0 waives attribu
 commercial use and CC BY-ND forbids modification/recoloring. Since this project recolors models
 commercially, the grant should explicitly cover <b>commercial use AND derivatives</b>. Getting this in
 writing is an open item (see §10).</p>
+<p class="muted">Storage decision: raw photoscans are <b>kept out of git</b> (the project's
+<code>Assets/_External/</code> is git-ignored) and live in external storage. The public repo carries only
+code/docs for now; committing optimized/derived model assets is deferred until the written grant is secured.</p>
 
 <h2>8. Technical Requirements</h2>
 <ul>
@@ -171,7 +174,9 @@ later, so it is a standing design constraint from the first prototype.</p>
 <h3>Milestone 1 &mdash; Reveal prototype</h3>
 <ul>
   <li>Install Meta XR All-in-One SDK; switch to Android; run Meta Project Setup Tool. <span class="muted">(done)</span></li>
-  <li>Grab a model and hold a spray can / brush (Interaction SDK).</li>
+  <li>Grab a model and hold a spray can / brush (Interaction SDK) &mdash; spray-gun tool with grip-anchored
+      ISDK grab, trigger spray, haptics, aim line; tabletop model grabbable (move/rotate, scale locked).
+      Verified over Quest Link. <span class="muted">(done &mdash; Milestone 1 complete)</span></li>
   <li>Prototype the reveal technique &mdash; <b>texture-space painting</b> chosen and validated on desktop, with an input-agnostic <code>PaintProbe</code> seam (mouse + VR drivers share one paint core). <span class="muted">(done)</span></li>
 </ul>
 <h3>Milestone 2 &mdash; One cozy model, end to end</h3>
@@ -197,6 +202,7 @@ later, so it is a standing design constraint from the first prototype.</p>
 <h2>12. Version History</h2>
 <table>
   <tr><th>Version</th><th>Date</th><th>Changes</th></tr>
+  <tr><td>0.6</td><td>2026-06-12</td><td><b>Milestone 1 complete — first playable VR slice (Quest Link).</b> World-space brush stamping (fixes UV-island bleed-through; radii in true meters). Stereo-instancing fix in the reveal shader (right eye was blank) + 5-tap mask dilation (hides white UV-seam cracks). VR spray-gun tool: ISDK grip grab via Grab Source, analog trigger spray, controller haptics, always-on aim line. Tabletop model grabbable: one-hand move, two-hand rotate, scale locked. Asset storage decision recorded (raw photoscans stay out of git). Known next: hide controller while holding the gun; deepen the loop (it works but feels simple).</td></tr>
   <tr><td>0.5</td><td>2026-06-09</td><td>Built the first reveal prototype: texture-space painting (URP <code>RevealMask</code> + <code>BrushStamp</code> blit, ping-pong mask in <code>PaintableSurface</code>) with an input-decoupled <code>PaintProbe</code>/<code>PaintTool</code> (mouse + VR drivers share one paint core). Validated on desktop. Milestone 1 reveal item ticked.</td></tr>
   <tr><td>0.4</td><td>2026-06-08</td><td>Added the <b>input-decoupling architecture principle</b> (player actions behind an input-agnostic interface; Meta input is one driver) and a <b>web (non-VR Unity WebGL) stretch target</b> for a tiny level in a mobile browser, with its constraints (WebGL2 = no compute shaders; Meta packages excluded from web builds; three.js is out of scope). Updated editor to 6000.3.17f1. <em>Note:</em> project relocated off OneDrive into a local folder to stop sync-induced import errors; repo re-homed to a fresh Unity 6 project.</td></tr>
   <tr><td>0.3</td><td>2026-06-07</td><td>Scaffolded the Unity 6 URP project (editor 6000.3.2f1) at the repo root from Unity's bundled URP template; set product name/app id (SpiralArmZ / Funes Coloring Demo); added <code>Assets/_Project</code> structure. Updated roadmap; Meta XR All-in-One SDK install is the next step.</td></tr>

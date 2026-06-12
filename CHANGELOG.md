@@ -5,6 +5,28 @@ The PRD (`PRD.html`) is the living source of truth; this file summarizes how it 
 
 Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.6] — 2026-06-12
+
+**Milestone 1 complete — first playable VR slice, verified over Quest Link.**
+
+### Added
+- **VR spray-gun tool:** user's spray-gun model wired with ISDK `Grabbable`/`GrabInteractable` (consistent
+  grip via Grab Source), analog trigger spray, controller haptics (`NotifyPaintApplied` hook), and an
+  always-on aim line (`TryGetAimRay` on the probe seam).
+- **Grabbable tabletop model:** one-hand move, two-hand rotate, scale locked via `GrabFreeTransformer`
+  constraints — the Puzzling Places-style inspect gesture.
+
+### Fixed
+- **World-space brush stamping** (`BrushStampWorld` + `PaintableSurface` rewrite): painting the front no
+  longer reveals the back (UV-island bleed); brush radii are true meters.
+- **Stereo rendering:** reveal shader now has single-pass-instanced macros — right eye was rendering nothing.
+- **UV seam cracks:** mask sampled with 5-tap max dilation; texel size supplied via the property block.
+
+### Notes / next
+- Hide the controller model while holding the spray gun (queued).
+- Core loop works but feels simple — depth ideas live in PRD §5 layering strategy.
+- Raw photoscans remain out of git per the storage decision (PRD §7).
+
 ## [0.5] — 2026-06-09
 
 ### Added

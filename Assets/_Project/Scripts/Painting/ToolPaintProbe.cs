@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
 
 namespace Funes.Painting
 {
@@ -20,8 +21,39 @@ namespace Funes.Painting
         [Tooltip("Below this activation value, no paint is applied.")]
         [SerializeField, Range(0f, 1f)] float threshold = 0.1f;
 
+        [Header("Haptics")]
+        [Tooltip("Peak rumble amplitude at full trigger pressure (0 disables haptics).")]
+        [SerializeField, Range(0f, 1f)] float hapticAmplitude = 0.25f;
+
+        const float HapticPulseDuration = 0.05f;
+        const float HapticResendInterval = 0.04f; // overlapping pulses read as one soft continuous buzz
+        float _nextHapticTime;
+
         void OnEnable()  { activateAction.action?.Enable(); }
         void OnDisable() { activateAction.action?.Disable(); }
+
+        public override void NotifyPaintApplied(float activation)
+        {
+            if (hapticAmplitude <= 0f || Time.unscaledTime < _nextHapticTime) return;
+
+            // The control that produced the trigger value belongs to the controller
+            // we should rumble — works for either hand without extra configuration.
+            var device = activateAction.action?.activeControl?.device;
+            if (device is XRControllerWithRumble rumble)
+            {
+                rumble.SendImpulse(hapticAmplitude * Mathf.Clamp01(activation), HapticPulseDuration);
+                _nextHapticTime = Time.unscaledTime + HapticResendInterval;
+            }
+        }
+
+        public override bool TryGetAimRay(out Ray ray)
+        {
+            // A held tool always has an aim pose, trigger or not — lets the aim
+            // line show while lining up a spray.
+            Transform origin = tip != null ? tip : transform;
+            ray = new Ray(origin.position, origin.forward);
+            return true;
+        }
 
         public override bool TryGetPaintRay(out Ray ray, out float activation)
         {
