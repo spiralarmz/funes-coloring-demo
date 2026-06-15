@@ -25,6 +25,18 @@ namespace Funes.Painting
         [Tooltip("Reveal amount added per second at full activation.")]
         [SerializeField] float fillRate = 3f;
 
+        [Header("Spray cone falloff (Spray mode only)")]
+        [Tooltip("Within this distance (m) spray is full strength.")]
+        [SerializeField] float sprayFalloffStart = 0.12f;
+        [Tooltip("Beyond this distance (m) spray applies nothing.")]
+        [SerializeField] float sprayFalloffEnd = 0.6f;
+        [Tooltip("Higher = spray must hit more square-on to register; glancing faces resist it " +
+                 "(rewards getting perpendicular, and leaves recesses for the brush).")]
+        [SerializeField, Range(1f, 8f)] float sprayAngleSharpness = 2.5f;
+        [Tooltip("Apply the distance falloff. Turn OFF on the desktop mouse tester — the camera sits " +
+                 "far from the model and would otherwise zero out the spray. Angle falloff still applies.")]
+        [SerializeField] bool useDistanceFalloff = true;
+
         [Header("Reach")]
         [SerializeField] float maxDistance = 5f;
         [SerializeField] LayerMask paintableLayers = ~0;
@@ -63,8 +75,26 @@ namespace Funes.Painting
             float hardness = mode == Mode.Spray ? sprayHardness : brushHardness;
             float strength = activation * fillRate * Time.deltaTime;
 
+            // Spray weakens with distance and glancing angle, so recessed / steep faces
+            // barely take it — you finish those with the contact brush (the two-stage
+            // reveal). Brush mode paints flat on contact, at any angle.
+            if (mode == Mode.Spray)
+                strength *= SprayConeFalloff(ray, hit);
+
+            if (strength <= 0f) return;
+
             surface.PaintAt(hit.point, radius, strength, hardness);
             _probe.NotifyPaintApplied(activation);
+        }
+
+        float SprayConeFalloff(Ray ray, RaycastHit hit)
+        {
+            float distF  = useDistanceFalloff
+                ? 1f - Mathf.Clamp01(Mathf.InverseLerp(sprayFalloffStart, sprayFalloffEnd, hit.distance))
+                : 1f;
+            float facing = Mathf.Clamp01(Vector3.Dot(-ray.direction.normalized, hit.normal));
+            float angleF = Mathf.Pow(facing, sprayAngleSharpness);
+            return distF * angleF;
         }
 
         void UpdateAimLine(Ray ray, bool didHit, RaycastHit hit)
